@@ -15,11 +15,12 @@ public class FileWorker {
             }
 
             //PrintWriter обеспечит возможности записи в файл
-            PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+            PrintWriter out = new PrintWriter(new FileWriter(file, true));
 
             try {
                 //Записываем текст у файл
-                out.print(text);
+                out.write(text);
+                out.flush();
             } finally {
                 //После чего мы должны закрыть файл
                 //Иначе файл не запишется

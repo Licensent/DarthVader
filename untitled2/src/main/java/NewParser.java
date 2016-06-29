@@ -7,25 +7,34 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.List;
 
 public class NewParser {
+    private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
 
-    public static String parse(String name) {
+    InputStream in = null;
+    HSSFWorkbook wb = null;
 
-        String result = "";
-        InputStream in = null;
-        HSSFWorkbook wb = null;
-        try {
-            in = new FileInputStream(name);
-            wb = new HSSFWorkbook(in);
-        } catch (IOException e) {
-            e.printStackTrace();
+    public String XXX(List<File> a) {
+        for (File name : a) {
+            try {
+                in = new FileInputStream(name);
+                wb = new HSSFWorkbook(in);
+                parser(wb);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        return null;
+    }
 
+    public String parser(HSSFWorkbook wb) {
+        String result = "";
         Sheet sheet = wb.getSheetAt(0);
         Iterator<Row> it = sheet.iterator();
         while (it.hasNext()) {
@@ -52,8 +61,12 @@ public class NewParser {
             }
             result += "\n";
         }
-
+        FileWorker.write(fileName2, result);
+        System.out.println(result);
         return result;
+
+
     }
 
 }
+

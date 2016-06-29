@@ -16,7 +16,7 @@
 /untitled2/.idea/dynamic.xml
 /untitled2/.idea/uiDesigner.xml
 /untitled2/.idea/compiler.xml
-
+*.java
 # Gradle:
 /untitled2/.idea/gradle.xml
 /untitled2/.idea/libraries

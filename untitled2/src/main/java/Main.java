@@ -4,15 +4,15 @@ import java.io.FileNotFoundException;
  * Created by DarthVader on 20.06.2016.
  */
 public class Main {
-    private static String text;
     private static String fileName = "C://projects/DarthVader/untitled2";
     private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
     private static String ext = ".xls";
-
+//    public static List<Person> persons = new Person(a.XXX(MyFileNameFilter.findFiles(fileName, ext)));
     public static void main(String... args) throws FileNotFoundException {
 //        MyFileNameFilter.findFiles(fileName, ext);
         NewParser a = new NewParser();
-        a.XXX(MyFileNameFilter.findFiles(fileName,ext));
+        a.XXX(MyFileNameFilter.findFiles(fileName, ext));
+
         //        NewParser parser = new NewParser(filter);
 //        File[] fileList;
 //        File file = new File(fileName);

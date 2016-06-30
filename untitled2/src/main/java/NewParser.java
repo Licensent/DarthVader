@@ -11,16 +11,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
 
 public class NewParser {
-    private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
 
+    private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
     InputStream in = null;
     HSSFWorkbook wb = null;
 
-    public String XXX(List<File> a) {
+    public void XXX(List<File> a) {
         for (File name : a) {
             try {
                 in = new FileInputStream(name);
@@ -30,13 +29,36 @@ public class NewParser {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 
-    public String parser(HSSFWorkbook wb) {
+    public void parser(HSSFWorkbook wb) {
         String result = "";
         Sheet sheet = wb.getSheetAt(0);
-        Iterator<Row> it = sheet.iterator();
+        for (Row row : sheet) {
+            for (Cell cell : row) {
+                int cellType = cell.getCellType();
+                switch (cellType) {
+                    case Cell.CELL_TYPE_STRING:
+                        result += cell.getStringCellValue() + " ";
+                        break;
+                    case Cell.CELL_TYPE_NUMERIC:
+                        result += "[" + cell.getNumericCellValue() + "]";
+                        break;
+
+                    case Cell.CELL_TYPE_FORMULA:
+                        result += "[" + cell.getNumericCellValue() + "]";
+                        break;
+                    default:
+                        result += "|";
+                        break;
+                }
+            }
+            result += "\n";
+        }
+        FileWorker.write(fileName2, result);
+        System.out.println(result);
+
+        /*Iterator<Row> it = sheet.iterator();
         while (it.hasNext()) {
             Row row = it.next();
             Iterator<Cell> cells = row.iterator();
@@ -62,10 +84,7 @@ public class NewParser {
             result += "\n";
         }
         FileWorker.write(fileName2, result);
-        System.out.println(result);
-        return result;
-
-
+        System.out.println(result);*/
     }
 
 }

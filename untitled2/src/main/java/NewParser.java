@@ -25,47 +25,72 @@ public class NewParser {
             try {
                 in = new FileInputStream(name);
                 wb = new HSSFWorkbook(in);
-                parser(wb);
+                List<Person> persons = parser(wb);
+                writePersons(persons);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void parser(HSSFWorkbook wb) {
+    private void writePersons(List<Person> persons) {
+        for (Person person : persons) {
+            FileWorker.write(fileName2, person.toString() + "\n");
+            System.out.println(person.toString());
+        }
+    }
+
+    public List<Person> parser(HSSFWorkbook wb) {
         List<Person> persons = new ArrayList<>();
-        String result = "";
         Sheet sheet = wb.getSheetAt(0);
         for (Row row : sheet) {
-            for (Cell cell : row) {
-                List<Double> doubleList = new ArrayList<>();
-                List<String> stringList = new ArrayList<>();
-                int cellType = cell.getCellType();
-                switch (cellType) {
-                    case Cell.CELL_TYPE_STRING:
-                        result += cell.getStringCellValue() + " ";
-                        stringList.add(cell.getStringCellValue());
-                        break;
-                    case Cell.CELL_TYPE_NUMERIC:
-                        result += "[" + cell.getNumericCellValue() + "]";
-                        doubleList.add(cell.getNumericCellValue());
-                        break;
-
-                    case Cell.CELL_TYPE_FORMULA:
-                        result += "[" + cell.getNumericCellValue() + "]";
-                        break;
-                    default:
-                        result += "|";
-                        break;
-                }
-                Person person = new Person(doubleList.get(0), stringList.get(0), stringList.get(1), stringList.get(2));
-                personadd(person);
+            if (row.getRowNum() == 0) {
+                continue;
             }
-            result += "\n";
+            persons.add(getPerson(row));
         }
-        FileWorker.write(fileName2, result);
-        System.out.println(result);
+        return persons;
 
+
+    }
+
+    private Person getPerson(Row row) {
+        Person.PersonBuilder personBuilder = new Person.PersonBuilder();
+        for (Cell cell : row) {
+            String cellValueString = getCellValueString(cell);
+
+            if (getColumnName(cell).equals("Name")) {
+                personBuilder.setName(cellValueString);
+            } else if (getColumnName(cell).equals("LastName")) {
+                personBuilder.setLastname(cellValueString);
+            } else if (getColumnName(cell).equals("TelNumber")) {
+                personBuilder.setPhone(cellValueString);
+            }
+            if (getColumnName(cell).equals("Number")) {
+                if (cellValueString != null) {
+                    personBuilder.setNumber(Double.valueOf(cellValueString));
+                }
+            }
+
+        }
+        return personBuilder.build();
+    }
+
+    private String getCellValueString(Cell cell) {
+        int cellType = cell.getCellType();
+        switch (cellType) {
+            case Cell.CELL_TYPE_STRING:
+                return cell.getStringCellValue();
+            case Cell.CELL_TYPE_NUMERIC:
+                return String.valueOf(cell.getNumericCellValue());
+            default:
+                return null;
+        }
+
+    }
+
+    private String getColumnName(Cell cell) {
+        return cell.getRow().getSheet().getRow(0).getCell(cell.getColumnIndex()).getStringCellValue();
     }
 
     public List<Person> personadd(Person person) {

@@ -7,7 +7,7 @@ public class Main {
     private static String fileName = "C://projects/DarthVader/untitled2";
     private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
     private static String ext = ".xls";
-//    public static List<Person> persons = new Person(a.XXX(MyFileNameFilter.findFiles(fileName, ext)));
+//    public static List<Person> persons = ;
     public static void main(String... args) throws FileNotFoundException {
 //        MyFileNameFilter.findFiles(fileName, ext);
         NewParser a = new NewParser();

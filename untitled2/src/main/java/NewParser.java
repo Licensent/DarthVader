@@ -12,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class NewParser {
@@ -19,8 +20,8 @@ public class NewParser {
     private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
     InputStream in = null;
     HSSFWorkbook wb = null;
-
-    public void XXX(List<File> a) {
+    public static HashSet<Person> myHashSet = new HashSet<>();
+        public void XXX(List<File> a) {
         for (File name : a) {
             try {
                 in = new FileInputStream(name);
@@ -37,9 +38,9 @@ public class NewParser {
         String result = "";
         Sheet sheet = wb.getSheetAt(0);
         for (Row row : sheet) {
+            List<Double> doubleList = new ArrayList<>();
+            List<String> stringList = new ArrayList<>();
             for (Cell cell : row) {
-                List<Double> doubleList = new ArrayList<>();
-                List<String> stringList = new ArrayList<>();
                 int cellType = cell.getCellType();
                 switch (cellType) {
                     case Cell.CELL_TYPE_STRING:
@@ -58,21 +59,37 @@ public class NewParser {
                         result += "|";
                         break;
                 }
-                Person person = new Person(doubleList.get(0), stringList.get(0), stringList.get(1), stringList.get(2));
-                personadd(person);
+
             }
             result += "\n";
+            Person person = new Person(doubleList.get(0), stringList.get(0), stringList.get(1), stringList.get(2));
+            myHashSet.add(person);
+//            personadd(person);
+//            setPersons(person);
+//            createPerson(doubleList.get(0), stringList.get(0), stringList.get(1), stringList.get(2));
         }
+//        System.out.println(myHashSet);
         FileWorker.write(fileName2, result);
-        System.out.println(result);
+//        System.out.println(result);
 
     }
 
-    public List<Person> personadd(Person person) {
-        List<Person> persons = new ArrayList<>();
-        persons.add(person);
-        System.out.println(persons);
-        return persons;
+    /* public List<Person> personadd(Person person) {
+         List<Person> persons = new ArrayList<>();
+         persons.add(person);
+ //        System.out.println(persons);
+         return persons;
+     }*/
+   /* public void createPerson(Double number, String lastName, String name, String phone) {
+        Person person = new Person(number, lastName, name, phone);
+        setPersons(person);
     }
+
+    public void setPersons(Person person) {
+        myHashSet.add(person);
+//        System.out.println(myHashSet);
+//        return myHashSet;
+    }*/
+
 }
 

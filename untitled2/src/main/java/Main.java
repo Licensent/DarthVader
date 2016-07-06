@@ -12,6 +12,7 @@ public class Main {
 //        MyFileNameFilter.findFiles(fileName, ext);
         NewParser a = new NewParser();
         a.XXX(MyFileNameFilter.findFiles(fileName, ext));
+        System.out.println(NewParser.myHashSet);
 
         //        NewParser parser = new NewParser(filter);
 //        File[] fileList;

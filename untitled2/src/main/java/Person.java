@@ -12,4 +12,34 @@ public class Person {
         this.name=name;
         this.phone=phone;
     }
+    public String toString(){
+        return "Number "+ number +'\\'+
+                " Lastname "+lastname+'\\'+
+                " Name "+name+'\\'+
+                " Phone "+phone;
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (number != null ? !number.equals(person.number) : person.number != null) return false;
+        if (lastname != null ? !lastname.equals(person.lastname) : person.lastname != null) return false;
+        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        return !(phone != null ? !phone.equals(person.phone) : person.phone != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = number != null ? number.hashCode() : 0;
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        return result;
+    }
 }

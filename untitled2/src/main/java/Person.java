@@ -2,22 +2,56 @@
  * Created by DarthVader on 30.06.2016.
  */
 public class Person {
-    Double number;
-    String lastname;
-    String name;
-    String phone;
-    Person(Double number,String lastname, String name, String phone){
-        this.number=number;
-        this.lastname=lastname;
-        this.name=name;
-        this.phone=phone;
-    }
-    public String toString(){
-        return "Number "+ number +'\\'+
-                " Lastname "+lastname+'\\'+
-                " Name "+name+'\\'+
-                " Phone "+phone;
+    private Double number;
+    private String lastname;
+    private String name;
+    private String phone;
 
+    Person(Double number, String lastname, String name, String phone) {
+        this.number = number;
+        this.lastname = lastname;
+        this.name = name;
+        this.phone = phone;
+    }
+
+    public String toString() {
+        return "Number " + number + '\\' +
+                " Lastname " + lastname + '\\' +
+                " Name " + name + '\\' +
+                " Phone " + phone;
+
+    }
+
+    public Double getNumber() {
+        return number;
+    }
+
+    public void setNumber(Double number) {
+        this.number = number;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override

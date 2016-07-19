@@ -16,12 +16,8 @@ public class MyFileNameFilter implements FilenameFilter {
     protected static List<File> findFiles(String fileName, String ext) {
         File file = new File(fileName);
         List<File> list = new LinkedList<>();
-        if (!file.exists()) {
-//            list.add(fileName + " не существует");
-        }
         File[] listFiles = file.listFiles(new MyFileNameFilter(ext));
         if (listFiles.length == 0) {
-//            list.add(fileName + "не содержит файлов с расширением " + ext);
         } else {
             for (File f : listFiles) {
                 list.add(f);

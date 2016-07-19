@@ -11,17 +11,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class NewParser {
 
+    public static HashSet<Person> myHashSet = new HashSet<>();
+    List<Person> persons= new ArrayList<>(myHashSet);
     private static String fileName2 = "C://projects/DarthVader/untitled2/2.txt";
     InputStream in = null;
     HSSFWorkbook wb = null;
-    public static HashSet<Person> myHashSet = new HashSet<>();
-        public void XXX(List<File> a) {
+
+    public void XXX(List<File> a) {
         for (File name : a) {
             try {
                 in = new FileInputStream(name);
@@ -64,32 +64,25 @@ public class NewParser {
             result += "\n";
             Person person = new Person(doubleList.get(0), stringList.get(0), stringList.get(1), stringList.get(2));
             myHashSet.add(person);
-//            personadd(person);
-//            setPersons(person);
-//            createPerson(doubleList.get(0), stringList.get(0), stringList.get(1), stringList.get(2));
+
         }
-//        System.out.println(myHashSet);
         FileWorker.write(fileName2, result);
-//        System.out.println(result);
 
     }
-
-    /* public List<Person> personadd(Person person) {
-         List<Person> persons = new ArrayList<>();
-         persons.add(person);
- //        System.out.println(persons);
-         return persons;
-     }*/
-   /* public void createPerson(Double number, String lastName, String name, String phone) {
-        Person person = new Person(number, lastName, name, phone);
-        setPersons(person);
+    public void sortedHash(){
+        Collections.sort(persons, new Comparator<Person>(){ public int compare(Person o1, Person o2) {
+            return o1.toString().compareTo(o2.toString());
+        }});
     }
 
-    public void setPersons(Person person) {
-        myHashSet.add(person);
-//        System.out.println(myHashSet);
-//        return myHashSet;
-    }*/
+
+    public static <T> List<T> unionLists (List<T> ... lists){
+        List<T> resultList = new ArrayList<>();
+        for (List<T> list : lists) {
+            resultList.addAll(list);
+        }
+        return resultList;
+    }
 
 }
 

@@ -1,13 +1,8 @@
-import java.util.HashMap;
-
 /**
  * Created by DarthVader on 03.09.2016.
  */
 public class MatchParser {
-    private HashMap<String, Double> variables;
-
-    public MatchParser() {
-    }
+        public MatchParser() {}
 
     public double parse(String s) throws Exception {
         Result result = plusMinus(s);

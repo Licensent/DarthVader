@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.util.*;
 
 /**
@@ -20,7 +21,8 @@ public class MyFilter {
         }
         System.out.println(lastNameMap);
         for (String s:lastNameMap.keySet()){
-            FileWorker.write(fileName3, lastNameMap.get(s));
+            File file = new File(s+".txt");
+            FileWorker.write(file, lastNameMap.get(s));
         }
         return lastNameMap;
 

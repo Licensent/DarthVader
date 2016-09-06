@@ -55,6 +55,8 @@ public class Main {
         myFilter.myFilter(persons);
 
 
+
+
        /* List<String> integerList = new ArrayList<>();
         Collection<String> collection = integerList;
         integerList.add("xxx");

@@ -5,44 +5,19 @@ import java.util.Set;
  * Created by DarthVader on 20.06.2016.
  */
 public class FileWorker {
-    public static void write(String fileName, String text) {
+
+    public static void write(File fileName, Set text) {
         //Определяем файл
-        File file = new File(fileName);
+//        File file = fileName;
 
         try {
             //проверяем, что если файл не существует то создаем его
-            if (!file.exists()) {
-                file.createNewFile();
+            if (!fileName.exists()) {
+                fileName.createNewFile();
             }
 
             //PrintWriter обеспечит возможности записи в файл
-            PrintWriter out = new PrintWriter(new FileWriter(file, true));
-
-            try {
-                //Записываем текст у файл
-                out.write(text);
-                out.flush();
-            } finally {
-                //После чего мы должны закрыть файл
-                //Иначе файл не запишется
-                out.close();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public static void write(String fileName, Set text) {
-        //Определяем файл
-        File file = new File(fileName);
-
-        try {
-            //проверяем, что если файл не существует то создаем его
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            //PrintWriter обеспечит возможности записи в файл
-            PrintWriter out = new PrintWriter(new FileWriter(file, true));
+            PrintWriter out = new PrintWriter(new FileWriter(fileName, true));
 
             try {
                 //Записываем текст у файл
@@ -58,12 +33,18 @@ public class FileWorker {
         }
     }
 
+    public static void write(String fileName2, Set text) {
+        File fileName = new File(fileName2);
+        write(fileName, text);
+    }
+
+
     public static String read(String fileName) throws FileNotFoundException {
         //Этот спец. объект для построения строки
         File file = new File(fileName);
         StringBuilder sb = new StringBuilder();
 
-        exists(fileName);
+        exists(file);
 
         try {
             //Объект для чтения файла в буфер
@@ -87,8 +68,7 @@ public class FileWorker {
         return sb.toString();
     }
 
-    private static void exists(String fileName) throws FileNotFoundException {
-        File file = new File(fileName);
+    private static void exists(File file) throws FileNotFoundException {
         if (!file.exists()) {
             throw new FileNotFoundException(file.getName());
         }

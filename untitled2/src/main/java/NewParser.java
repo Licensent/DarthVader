@@ -66,7 +66,6 @@ public class NewParser {
             myHashSet.add(person);
 
         }
-        FileWorker.write(fileName2, result);
 
     }
     public void sortedHash(){
